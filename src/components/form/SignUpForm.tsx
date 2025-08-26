@@ -4,10 +4,12 @@ import AuthLayout from '../layout/AuthLayout';
 import AuthInput from '../auth/AuthInput';
 import AuthButton from '../auth/AuthButton';
 import { useState } from 'react';
-import { AuthErrors } from '../../app/type/auth';
+//타입
+import type { AuthErrors } from '../../app/type/auth';
+import type { SignUpForm } from '../../app/type/auth';
 
 export default function SignUpForm() {
-  const [form,setForm] = useState({
+  const [form,setForm] = useState<SignUpForm>({
     email:'',
     password:'',
     nickname:'',
