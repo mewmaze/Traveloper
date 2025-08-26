@@ -5,8 +5,8 @@ import AuthInput from '../auth/AuthInput';
 import AuthButton from '../auth/AuthButton';
 import { useState } from 'react';
 //타입
-import type { AuthErrors } from '../../app/type/auth';
-import type { SignUpForm } from '../../app/type/auth';
+import type { AuthErrors } from '../../type/auth';
+import type { SignUpForm } from '../../type/auth';
 
 export default function SignUpForm() {
   const [form,setForm] = useState<SignUpForm>({

@@ -1,3 +1,4 @@
+import type { User } from "@supabase/supabase-js";
 //회원가입 로그인 에러 타입
 export interface AuthErrors {
   email?:string;
@@ -17,4 +18,9 @@ export interface SignUpForm {
 export interface LoginForm {
   email: string;
   password: string;
+}
+// 인증 컨텍스트 타입
+export interface AuthContextType {
+  user: User | null;
+  setUser: (user: User | null) => void;
 }
