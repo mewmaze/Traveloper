@@ -1,16 +1,20 @@
-import { createClient } from "../utils/supabase/server";
-export default async function Home() {
-  const supabase=await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+'use client';
+import LogoutButton from '../components/auth/LogoutButton';
+import { useAuth } from '../hooks/useAuth';
+export default function Home() {
+  const { user } = useAuth();
+
+  if (!user) {
+    return (
+      <>
+        <p>로그인 해주세요</p>
+        <a href="/login">로그인 페이지로 이동</a>
+      </>
+    );
+  }
   return (
-    <div>
-      {user ? (
-        <p>환영합니다, {user.email}님!</p>
-      ) : (
-        <p>로그인 해주세요.</p>
-      )}
-    </div>
-  )
+    <>
+      <h1>환영합니다, {user.email}님!</h1> <LogoutButton />
+    </>
+  );
 }

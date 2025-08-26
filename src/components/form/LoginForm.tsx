@@ -4,8 +4,8 @@ import AuthLayout from '../layout/AuthLayout';
 import AuthInput from '../auth/AuthInput';
 import AuthButton from '../auth/AuthButton';
 //타입
-import type { AuthErrors } from '../../app/type/auth';
-import type { LoginForm } from '../../app/type/auth';
+import type { AuthErrors } from '../../type/auth';
+import type { LoginForm } from '../../type/auth';
 
 export default function LoginForm() {
   const [form,setForm] = useState<LoginForm>({email:'',password:''})
