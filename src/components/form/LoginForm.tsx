@@ -8,14 +8,14 @@ import type { AuthErrors } from '../../type/auth';
 import type { LoginForm } from '../../type/auth';
 
 export default function LoginForm() {
-  const [form,setForm] = useState<LoginForm>({email:'',password:''})
-  const [error,setError]=useState<AuthErrors>({})
+  const [form, setForm] = useState<LoginForm>({ email: '', password: '' });
+  const [error, setError] = useState<AuthErrors>({});
 
-  function handleChange(e:React.ChangeEvent<HTMLInputElement>){
-    setForm(prev=>({...prev,[e.target.name]:e.target.value}))
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
-async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
-   e.preventDefault();
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
     const newErrors: AuthErrors = {};
     if (!form.email) newErrors.email = '이메일을 입력하세요.';
     if (!form.password) newErrors.password = '비밀번호를 입력하세요.';
@@ -42,13 +42,35 @@ async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
   return (
     <AuthLayout>
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <AuthInput type="email" name="email" placeholder="이메일을 입력하세요" emoji="📧" onChange={handleChange}           error={!!error.email}
-          errorMessage={error.email}/>
-        <AuthInput type="password" name="password" placeholder="비밀번호를 입력하세요" emoji="🔒" onChange={handleChange} error={!!error.password}
-          errorMessage={error.password}/>
-           {error.global && <p className="text-red-500 text-sm mt-2">{error.global}</p>}
+        <AuthInput
+          type="email"
+          name="email"
+          placeholder="이메일을 입력하세요"
+          emoji="📧"
+          onChange={handleChange}
+          error={!!error.email}
+          errorMessage={error.email}
+        />
+        <AuthInput
+          type="password"
+          name="password"
+          placeholder="비밀번호를 입력하세요"
+          emoji="🔒"
+          onChange={handleChange}
+          error={!!error.password}
+          errorMessage={error.password}
+        />
+        {error.global && <p className="text-red-500 text-sm mt-2">{error.global}</p>}
         <AuthButton text="로그인" />
       </form>
+      <div className="mt-4">
+        <p className="text-sm">
+          계정이 없으신가요?{' '}
+          <a href="/register" className="text-blue-500">
+            회원가입
+          </a>
+        </p>
+      </div>
     </AuthLayout>
   );
 }
