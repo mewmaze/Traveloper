@@ -1,10 +1,10 @@
-import type { User } from "@supabase/supabase-js";
+import type { User } from '@supabase/supabase-js';
 //회원가입 로그인 에러 타입
 export interface AuthErrors {
-  email?:string;
-  password?:string;
-  nickname?:string;
-  global?:string;
+  email?: string;
+  password?: string;
+  nickname?: string;
+  global?: string;
 }
 
 // 회원가입 폼 타입

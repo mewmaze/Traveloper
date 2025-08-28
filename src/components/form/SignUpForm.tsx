@@ -9,18 +9,18 @@ import type { AuthErrors } from '../../type/auth';
 import type { SignUpForm } from '../../type/auth';
 
 export default function SignUpForm() {
-  const [form,setForm] = useState<SignUpForm>({
-    email:'',
-    password:'',
-    nickname:'',
-  })
-  const [error,setError] = useState<AuthErrors>({});
+  const [form, setForm] = useState<SignUpForm>({
+    email: '',
+    password: '',
+    nickname: '',
+  });
+  const [error, setError] = useState<AuthErrors>({});
 
-  function handleChange(e:React.ChangeEvent<HTMLInputElement>){
-    setForm(prev => ({...prev, [e.target.name]:e.target.value}))
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  async function handleSubmit(e:React.FormEvent<HTMLFormElement>){
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const newErrors: AuthErrors = {};
     if (!form.email) newErrors.email = '이메일을 입력하세요.';
@@ -37,18 +37,18 @@ export default function SignUpForm() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(form),
-    })
+    });
 
     const result = await res.json();
-    if(result.errors) {
+    if (result.errors) {
       setError(result.errors);
     } else {
-      window.location.href='/'
+      window.location.href = '/';
     }
   }
   return (
     <AuthLayout>
-    <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={handleSubmit}>
         <AuthInput
           type="email"
           name="email"
