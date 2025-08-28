@@ -1,0 +1,20 @@
+import { NEW_TRIP_PATH } from '../../constants/routes';
+import type { Trip } from '../../type/trip';
+import TripItem from './TripItem';
+import { useRouter } from 'next/navigation';
+import type { Country } from '../../type/country';
+
+export default function TripList({ trips }: { trips: Trip[] }) {
+  const router = useRouter();
+
+  return (
+    <div className="p-6 sm:p-8">
+      <button onClick={() => router.push(NEW_TRIP_PATH)}>여행 추가</button>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {trips.map((trip) => (
+          <TripItem key={trip.id} trip={trip} />
+        ))}
+      </div>
+    </div>
+  );
+}
