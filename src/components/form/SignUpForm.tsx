@@ -1,85 +1,71 @@
 'use client';
 
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { createClient } from '../../utils/supabase/client';
 import AuthLayout from '../layout/AuthLayout';
-import AuthInput from '../auth/AuthInput';
 import AuthButton from '../auth/AuthButton';
-import { useState } from 'react';
-//타입
-import type { AuthErrors } from '../../type/auth';
-import type { SignUpForm } from '../../type/auth';
+import AuthInput from '../auth/AuthInput';
 
+const signupScheme = z.object({
+  email: z.string().email('올바른 이메일 형식이 아닙니다.'),
+  password: z.string().min(6, '비밀번호는 6자 이상이어야 합니다.'),
+  nickname: z.string().min(1, '닉네임을 입력하세요.'),
+});
+
+type SignUpForm = z.infer<typeof signupScheme>;
 export default function SignUpForm() {
-  const [form, setForm] = useState<SignUpForm>({
-    email: '',
-    password: '',
-    nickname: '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SignUpForm>({
+    resolver: zodResolver(signupScheme),
   });
-  const [error, setError] = useState<AuthErrors>({});
 
-  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  }
+  console.log('errors:', errors);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const newErrors: AuthErrors = {};
-    if (!form.email) newErrors.email = '이메일을 입력하세요.';
-    if (!form.password) newErrors.password = '비밀번호를 입력하세요.';
-    else if (form.password.length < 6) newErrors.password = '비밀번호는 6자 이상이어야 합니다.';
-    if (!form.nickname) newErrors.nickname = '닉네임을 입력하세요.';
-
-    if (Object.keys(newErrors).length > 0) {
-      setError(newErrors);
-      return;
-    }
-
-    const res = await fetch('/api/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form),
+  const onSubmit = async (data: SignUpForm) => {
+    const supabase = createClient();
+    const { email, password, nickname } = data;
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { data: { nickname } },
     });
-
-    const result = await res.json();
-    if (result.errors) {
-      setError(result.errors);
+    if (error) {
+      alert('회원가입에 실패했습니다. 다시 시도해주세요.');
     } else {
+      alert('회원가입에 성공했습니다!');
       window.location.href = '/';
     }
-  }
+  };
+
   return (
     <AuthLayout>
-      <form className="space-y-4" onSubmit={handleSubmit}>
+      <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
         <AuthInput
+          {...register('email')}
           type="email"
-          name="email"
-          placeholder="이메일을 입력하세요"
-          emoji="📧"
-          value={form.email}
-          onChange={handleChange}
-          error={!!error.email}
-          errorMessage={error.email}
+          placeholder="이메일"
+          error={!!errors.email}
+          errorMessage={errors.email?.message}
         />
         <AuthInput
+          {...register('password')}
           type="password"
-          name="password"
-          placeholder="비밀번호를 입력하세요"
-          emoji="🔒"
-          value={form.password}
-          onChange={handleChange}
-          error={!!error.password}
-          errorMessage={error.password}
+          placeholder="비밀번호"
+          error={!!errors.password}
+          errorMessage={errors.password?.message}
         />
         <AuthInput
+          {...register('nickname')}
           type="text"
-          name="nickname"
-          placeholder="닉네임을 입력하세요"
-          emoji="👤"
-          value={form.nickname}
-          onChange={handleChange}
-          error={!!error.nickname}
-          errorMessage={error.nickname}
+          placeholder="닉네임"
+          error={!!errors.nickname}
+          errorMessage={errors.nickname?.message}
         />
-        {error.global && <p className="text-red-500 text-sm mt-2">{error.global}</p>}
         <AuthButton text="회원가입" />
       </form>
     </AuthLayout>
