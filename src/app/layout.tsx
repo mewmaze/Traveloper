@@ -28,7 +28,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <AuthHeaderWrapper> {children}</AuthHeaderWrapper>
+          <AuthHeaderWrapper>
+            <div className="p-8">{children}</div>
+          </AuthHeaderWrapper>
         </Providers>
       </body>
     </html>
