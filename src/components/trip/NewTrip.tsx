@@ -1,14 +1,14 @@
 'use client';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { createClient } from '../../utils/supabase/client';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import DatePicker from 'react-datepicker';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../hooks/useAuth';
 import { ROOT_PATH } from '../../constants/routes';
 import type { Country } from '../../type/country';
 import 'react-datepicker/dist/react-datepicker.css';
+import TripInfoFields from '../form/TriipInfoFields';
 
 const tripSchema = z.object({
   country: z.string().min(1, '국가를 선택해주세요'),
@@ -30,7 +30,7 @@ const tripSchema = z.object({
     }),
 });
 
-type TripForm = z.infer<typeof tripSchema>;
+export type TripForm = z.infer<typeof tripSchema>;
 export default function NewTrip({ countries }: { countries: Country[] }) {
   const { user } = useAuth();
   const router = useRouter();
@@ -69,39 +69,17 @@ export default function NewTrip({ countries }: { countries: Country[] }) {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <select {...register('country')} className="input">
-        <option value="">국가를 선택하세요</option>
-        {countries.map((c) => (
-          <option key={c.cca2} value={c.name.common}>
-            {c.name.common}
-          </option>
-        ))}
-      </select>
-      {errors.country && <span className="text-red-500">{errors.country.message}</span>}
-      <input {...register('title')} placeholder="여행 제목" />
-      {errors.title && <span className="text-red-500">{errors.title.message}</span>}
-      <Controller
-        name="dateRange"
-        control={control}
-        render={({ field }) => (
-          <DatePicker
-            selectsRange
-            startDate={field.value?.[0]}
-            endDate={field.value?.[1]}
-            onChange={field.onChange}
-            placeholderText="여행 기간 선택"
-            dateFormat="yyyy-MM-dd"
-            isClearable
-          />
-        )}
-      />
-      {errors.dateRange && (
-        <span className="text-red-500">
-          {errors.dateRange.message || errors.dateRange[0]?.message || errors.dateRange[1]?.message}
-        </span>
-      )}
-      <button type="submit">여행 추가</button>
+    <form
+      className="flex flex-col gap-8 p-6 bg-white rounded-lg shadow w-full max-w-lg mx-auto"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <TripInfoFields register={register} control={control} errors={errors} countries={countries} />
+      <button
+        type="submit"
+        className="bg-blue-500 text-white px-4 py-2 font-bold rounded-md hover:bg-blue-600 cursor-pointer"
+      >
+        여행 추가
+      </button>
     </form>
   );
 }
