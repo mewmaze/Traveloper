@@ -11,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import TripInfoFields from '../form/TriipInfoFields';
 
 const tripSchema = z.object({
-  country: z.string().min(1, '국가를 선택해주세요'),
+  countryCode: z.string().min(1, '국가를 선택해주세요'),
   title: z.string().min(1, '제목을 입력해주세요'),
   dateRange: z
     .tuple([
@@ -42,7 +42,7 @@ export default function NewTrip({ countries }: { countries: Country[] }) {
   } = useForm<TripForm>({
     resolver: zodResolver(tripSchema),
     defaultValues: {
-      country: '',
+      countryCode: '',
       title: '',
       dateRange: [undefined, undefined],
     },
@@ -53,7 +53,7 @@ export default function NewTrip({ countries }: { countries: Country[] }) {
     const [startDate, endDate] = data.dateRange;
     const { error } = await supabase.from('trips').insert([
       {
-        country: data.country,
+        countryCode: data.countryCode,
         title: data.title,
         start_date: startDate.toISOString().slice(0, 10),
         end_date: endDate.toISOString().slice(0, 10),
