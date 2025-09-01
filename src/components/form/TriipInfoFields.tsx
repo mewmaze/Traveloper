@@ -17,15 +17,15 @@ export default function TripInfoFields({
 }) {
   return (
     <>
-      <select {...register('country')} className="input">
+      <select {...register('countryCode')} className="input">
         <option value="">국가를 선택하세요</option>
         {countries.map((c) => (
-          <option key={c.cca2} value={c.name.common}>
-            {c.name.common}
+          <option key={c.name} value={c.countryCode}>
+            {c.name}
           </option>
         ))}
       </select>
-      {errors.country && <span className="text-red-500">{errors.country.message}</span>}
+      {errors.countryCode && <span className="text-red-500">{errors.countryCode.message}</span>}
       <input {...register('title')} placeholder="여행 제목" className="input" />
       {errors.title && <span className="text-red-500">{errors.title.message}</span>}
       <Controller
