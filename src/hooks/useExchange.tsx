@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '../utils/supabase/client';
-import { countryToCurrency } from '../utils/countryToCurrency';
+import countryToCurrency, { Currencies, Countries } from 'country-to-currency';
 
 export const useExchange = (tripId?: number) => {
   const [exchangeRate, setExchangeRate] = useState<number | null>(null);
@@ -19,16 +19,16 @@ export const useExchange = (tripId?: number) => {
 
       if (!trip) return;
 
-      const code = countryToCurrency[trip.countryCode];
+      const code = (countryToCurrency as Record<string, string>)[trip.countryCode];
       console.log('code:', code);
       setCurrencyCode(code);
 
       const response = await fetch(
-        `https://v6.exchangerate-api.com/v6/${process.env.NEXT_PUBLIC_EXCHANGE_RATE_API_KEY}/latest/KRW`,
+        `https://v6.exchangerate-api.com/v6/${process.env.NEXT_PUBLIC_EXCHANGE_RATE_API_KEY}/latest/${code}`,
       );
       const data = await response.json();
 
-      setExchangeRate(data.conversion_rates[code]);
+      setExchangeRate(data.conversion_rates['KRW']);
     };
 
     fetchRate();
