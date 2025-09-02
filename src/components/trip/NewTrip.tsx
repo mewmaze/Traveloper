@@ -8,7 +8,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { ROOT_PATH } from '../../constants/routes';
 import type { Country } from '../../type/country';
 import 'react-datepicker/dist/react-datepicker.css';
-import TripInfoFields from '../form/TriipInfoFields';
+import TripInfoFields from '../form/TripInfoFields';
 
 const tripSchema = z.object({
   countryCode: z.string().min(1, '국가를 선택해주세요'),
