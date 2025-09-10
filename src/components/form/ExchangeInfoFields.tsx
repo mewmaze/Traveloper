@@ -6,13 +6,14 @@ import { createClient } from '../../utils/supabase/client';
 import { useEffect, useState } from 'react';
 import { useExchange } from '../../hooks/useExchange';
 import { useAuth } from '../../hooks/useAuth';
+import { useSearchParams } from 'next/navigation';
 const exchangeSchema = z.object({
   cashExchange: z.number(),
 });
 export type ExchangeForm = z.infer<typeof exchangeSchema>;
 export default function ExchangeInfoFields() {
   const { user } = useAuth();
-  const searchParams = new URLSearchParams(window.location.search);
+  const searchParams = useSearchParams();
   const tripIdParam = searchParams.get('tripId');
   const tripId = tripIdParam ? Number(tripIdParam) : null;
   const { exchangeRate, currencyCode } = useExchange(tripId ?? undefined);
