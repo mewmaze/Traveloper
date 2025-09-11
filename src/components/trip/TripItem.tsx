@@ -9,7 +9,10 @@ export default function TripItem({ trip }: { trip: Trip }) {
   const countries = useCountries();
   const countryInfo = countries.find((c) => c.countryCode === trip.countryCode);
   return (
-    <div className="bg-white rounded-lg shadow p-4 min-h-[200px] flex flex-col justify-between">
+    <div
+      className="bg-white rounded-lg shadow p-4 min-h-[200px] flex flex-col justify-between"
+      onClick={() => router.push(`/trips/${trip.id}`)}
+    >
       <h3 className="flex justify-between">
         <span>
           {countryInfo && (
@@ -25,7 +28,8 @@ export default function TripItem({ trip }: { trip: Trip }) {
         </span>
         <button
           className="text-blue-500 hover:underline"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
             router.push(`${EXCHANGE_PATH}?tripId=${trip.id}`);
           }}
         >
