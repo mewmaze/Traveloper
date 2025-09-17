@@ -12,7 +12,7 @@ export default async function SpendList({ tripId }: { tripId: string }) {
     .order('created_at', { ascending: false });
 
   if (error) return <div>지출 내역을 불러올 수 없습니다.</div>;
-  console.log('spends:', spends);
+
   return (
     <div>
       <div className="flex px-3 py-2 bg-gray-50 items-center mb-2 font-bold">

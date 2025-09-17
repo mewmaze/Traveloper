@@ -2,6 +2,7 @@
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { createSpendRecourd } from '../../app/trips/[id]/actions';
 const spendInputScheme = z.object({
   category: z.string(),
@@ -11,14 +12,24 @@ const spendInputScheme = z.object({
 });
 export type SpendInputForm = z.infer<typeof spendInputScheme>;
 export default function SpendInputForm({ tripId }: { tripId: string }) {
+  const router = useRouter();
   const {
     register,
+    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<SpendInputForm>({
     resolver: zodResolver(spendInputScheme),
   });
+
+  const onSubmit = async (data: SpendInputForm) => {
+    await createSpendRecourd({ ...data, trip_id: tripId });
+    router.refresh(); // SpendList 즉시 갱신
+    reset();
+  };
+
   return (
-    <form className="flex bg-gray-50 rounded-md px-3 py-2" action={createSpendRecourd}>
+    <form className="flex bg-gray-50 rounded-md px-3 py-2" onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" name="trip_id" value={tripId} />
       <select {...register('expense_method')} className="flex-1 min-w-0 px-2 py-4">
         <option value="">결제수단</option>
