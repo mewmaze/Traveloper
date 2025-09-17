@@ -2,35 +2,52 @@
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
 import { createSpendRecourd } from '../../app/trips/[id]/actions';
 const spendInputScheme = z.object({
   category: z.string(),
   amount: z.number(),
-  payment: z.string(),
+  expense_method: z.string(),
   memo: z.string().optional(),
 });
 export type SpendInputForm = z.infer<typeof spendInputScheme>;
 export default function SpendInputForm({ tripId }: { tripId: string }) {
+  const router = useRouter();
   const {
     register,
+    handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<SpendInputForm>({
     resolver: zodResolver(spendInputScheme),
   });
+
+  const onSubmit = async (data: SpendInputForm) => {
+    await createSpendRecourd({ ...data, trip_id: tripId });
+    router.refresh(); // SpendList 즉시 갱신
+    reset();
+  };
+
   return (
-    <form className="flex bg-gray-50 rounded-md px-3 py-2" action={createSpendRecourd}>
+    <form className="flex bg-gray-50 rounded-md px-3 py-2" onSubmit={handleSubmit(onSubmit)}>
       <input type="hidden" name="trip_id" value={tripId} />
-      <input
-        {...register('category')}
-        placeholder="카테고리"
-        className="flex-1 min-w-0 px-2 py-4"
-      />
+      <select {...register('expense_method')} className="flex-1 min-w-0 px-2 py-4">
+        <option value="">결제수단</option>
+        <option value="cash">현금</option>
+        <option value="card">카드</option>
+      </select>
       <input
         {...register('amount', { valueAsNumber: true })}
         placeholder="금액"
         className="flex-1 min-w-0 px-2 py-4"
       />
-      <input {...register('payment')} placeholder="결제수단" className="flex-1 min-w-0 px-2 py-4" />
+      <select {...register('category')} className="flex-1 min-w-0 px-2 py-4">
+        <option value="">카테고리</option>
+        <option value="식사">식사</option>
+        <option value="쇼핑">쇼핑</option>
+        <option value="교통">교통</option>
+        <option value="기타">기타</option>
+      </select>
       <input {...register('memo')} placeholder="메모" className="flex-[3] min-w-0 px-2 py-4" />
       <button type="submit" className="px-2 py-1 bg-blue-500 text-white">
         등록

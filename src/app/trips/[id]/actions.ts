@@ -1,18 +1,22 @@
 'use server';
 import { createClient } from '../../../utils/supabase/server';
-export async function createSpendRecourd(formData: FormData) {
+type SpendInput = {
+  category: string;
+  amount: number;
+  expense_method: string;
+  memo?: string;
+  trip_id: string;
+};
+
+export async function createSpendRecourd(input: SpendInput) {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  const category = formData.get('category') as string;
-  const amount = formData.get('amount') as string;
-  const payment = formData.get('payment') as string;
-  const memo = formData.get('memo') as string;
-  const trip_id = formData.get('trip_id') as string;
+  const { category, amount, expense_method, memo, trip_id } = input;
   const user_id = user?.id;
 
   await supabase
     .from('spend_records')
-    .insert([{ category, amount, payment, memo, user_id, trip_id }]);
+    .insert([{ category, amount, expense_method, memo, user_id, trip_id }]);
 }
