@@ -3,7 +3,7 @@ export interface SpendRecord {
   trip_id: string;
   category: string;
   amount: number;
-  payment: string;
+  expense_method: string;
   memo?: string;
   created_at: string;
   user_id: string;

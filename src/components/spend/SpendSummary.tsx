@@ -17,7 +17,7 @@ export default async function SpendSummary({ tripId }: { tripId: string }) {
     .from('spend_records')
     .select('amount.sum()')
     .eq('trip_id', Number(tripId))
-    .eq('payment', '현금')
+    .eq('expense_method', 'cash')
     .single();
   const totalCashSpend = totalCashSpendData?.sum || 0;
   const totalExchange = totalExchangeData?.sum || 0;

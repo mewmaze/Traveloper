@@ -6,7 +6,7 @@ import { createSpendRecourd } from '../../app/trips/[id]/actions';
 const spendInputScheme = z.object({
   category: z.string(),
   amount: z.number(),
-  payment: z.string(),
+  expense_method: z.string(),
   memo: z.string().optional(),
 });
 export type SpendInputForm = z.infer<typeof spendInputScheme>;
@@ -20,7 +20,11 @@ export default function SpendInputForm({ tripId }: { tripId: string }) {
   return (
     <form className="flex bg-gray-50 rounded-md px-3 py-2" action={createSpendRecourd}>
       <input type="hidden" name="trip_id" value={tripId} />
-      <input {...register('payment')} placeholder="결제수단" className="flex-1 min-w-0 px-2 py-4" />
+      <select {...register('expense_method')} className="flex-1 min-w-0 px-2 py-4">
+        <option value="">결제수단</option>
+        <option value="cash">현금</option>
+        <option value="card">카드</option>
+      </select>
       <input
         {...register('amount', { valueAsNumber: true })}
         placeholder="금액"
