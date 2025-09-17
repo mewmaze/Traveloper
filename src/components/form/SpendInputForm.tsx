@@ -30,11 +30,13 @@ export default function SpendInputForm({ tripId }: { tripId: string }) {
         placeholder="금액"
         className="flex-1 min-w-0 px-2 py-4"
       />
-      <input
-        {...register('category')}
-        placeholder="카테고리"
-        className="flex-1 min-w-0 px-2 py-4"
-      />
+      <select {...register('category')} className="flex-1 min-w-0 px-2 py-4">
+        <option value="">카테고리</option>
+        <option value="식사">식사</option>
+        <option value="쇼핑">쇼핑</option>
+        <option value="교통">교통</option>
+        <option value="기타">기타</option>
+      </select>
       <input {...register('memo')} placeholder="메모" className="flex-[3] min-w-0 px-2 py-4" />
       <button type="submit" className="px-2 py-1 bg-blue-500 text-white">
         등록
