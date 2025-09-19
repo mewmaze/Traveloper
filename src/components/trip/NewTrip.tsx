@@ -31,7 +31,7 @@ const tripSchema = z.object({
 });
 
 export type TripForm = z.infer<typeof tripSchema>;
-export default function NewTrip({ countries }: { countries: Country[] }) {
+export default function NewTrip() {
   const { user } = useAuth();
   const router = useRouter();
   const {
@@ -73,7 +73,7 @@ export default function NewTrip({ countries }: { countries: Country[] }) {
       className="flex flex-col gap-8 p-6 bg-white rounded-lg shadow w-full max-w-lg mx-auto"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <TripInfoFields register={register} control={control} errors={errors} countries={countries} />
+      <TripInfoFields register={register} control={control} errors={errors} />
       <button
         type="submit"
         className="bg-blue-500 text-white px-4 py-2 font-bold rounded-md hover:bg-blue-600 cursor-pointer"

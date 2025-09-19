@@ -3,18 +3,18 @@ import DatePicker from 'react-datepicker';
 import type { TripForm } from '../trip/NewTrip';
 import { FieldErrors } from 'react-hook-form';
 import { Country } from '../../type/country';
+import { useCountries } from '../../hooks/useCountries';
 
 export default function TripInfoFields({
   register,
-  countries,
   control,
   errors,
 }: {
   register: UseFormRegister<TripForm>;
   control: Control<TripForm>;
   errors: FieldErrors<TripForm>;
-  countries: Country[];
 }) {
+  const countries: Country[] = useCountries();
   return (
     <>
       <select {...register('countryCode')} className="input">
