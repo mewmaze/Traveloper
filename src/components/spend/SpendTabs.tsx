@@ -1,9 +1,10 @@
 'use client';
+import type { SpendRecord } from '../../type/spend';
 
 interface SpendTabsProps {
   currentDay: string;
   totalDays: number;
-  spendsByDay: Record<number, any[]>;
+  spendsByDay: Record<number, SpendRecord[]>;
   onDayChange: (day: string) => void;
 }
 
