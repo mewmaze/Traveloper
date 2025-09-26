@@ -1,27 +1,59 @@
-'use server';
-import { createClient } from '../../utils/supabase/server';
+'use client';
+
 import SpendItem from './SpendItem';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import SpendTabs from './SpendTabs';
 import type { SpendRecord } from '../../type/spend';
 
-export default async function SpendList({ tripId }: { tripId: string }) {
-  const supabase = await createClient();
-  const { data: spends, error } = await supabase
-    .from('spend_records')
-    .select('*')
-    .eq('trip_id', Number(tripId))
-    .order('created_at', { ascending: false });
+interface SpendListProps {
+  tripId: string;
+  data: {
+    success: boolean;
+    spends: SpendRecord[];
+    spendsByDay: Record<number, SpendRecord[]>;
+    tripInfo: {
+      totalDays: number;
+      start_date: string;
+      end_date: string;
+    };
+  };
+  selectedDay: string;
+}
+export default function SpendList({ tripId, data, selectedDay }: SpendListProps) {
+  const router = useRouter();
+  const [currentDay, setCurrentDay] = useState(selectedDay);
 
-  if (error) return <div>지출 내역을 불러올 수 없습니다.</div>;
+  const handleDayChange = (day: string) => {
+    setCurrentDay(day);
+    const url = day === 'all' ? `/trips/${tripId}` : `/trips/${tripId}?day=${day}`;
+    router.push(url);
+  };
+  const getCurrentSpends = () => {
+    if (currentDay === 'all') {
+      return data.spends;
+    }
+    const dayNumber = parseInt(currentDay);
+    return data.spendsByDay[dayNumber] || [];
+  };
+
+  const currentSpends = getCurrentSpends();
 
   return (
     <div>
+      <SpendTabs
+        currentDay={currentDay}
+        totalDays={data.tripInfo.totalDays}
+        spendsByDay={data.spendsByDay}
+        onDayChange={handleDayChange}
+      />
       <div className="flex px-3 py-2 bg-gray-50 items-center mb-2 font-bold">
         <div className="flex-1 px-2 border-r border-gray-300">카드/현금</div>
         <div className="flex-1 px-2 border-r border-gray-300">금액</div>
         <div className="flex-1 px-2 border-r border-gray-300">유형</div>
         <div className="flex-[3] px-2">메모</div>
       </div>
-      {spends?.map((spend: SpendRecord) => (
+      {currentSpends?.map((spend: SpendRecord) => (
         <SpendItem key={spend.id} spend={spend} />
       ))}
     </div>

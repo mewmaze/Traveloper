@@ -7,4 +7,5 @@ export interface SpendRecord {
   memo?: string;
   created_at: string;
   user_id: string;
+  date: string;
 }
