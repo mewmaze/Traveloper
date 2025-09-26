@@ -23,9 +23,13 @@ export default function SpendInputForm({ tripId }: { tripId: string }) {
   });
 
   const onSubmit = async (data: SpendInputForm) => {
-    await createSpendRecourd({ ...data, trip_id: tripId });
-    router.refresh(); // SpendList 즉시 갱신
-    reset();
+    const result = await createSpendRecourd({ ...data, trip_id: tripId });
+    if (result.success) {
+      router.refresh(); // SpendList 즉시 갱신
+      reset();
+    } else {
+      alert('등록 실패: ' + result.error);
+    }
   };
 
   return (
