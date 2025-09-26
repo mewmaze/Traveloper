@@ -33,13 +33,13 @@ export default function Home() {
         >
           <button
             onClick={() => router.push(LOGIN_PATH)}
-            className="block w-full h-12 rounded-md bg-[#5a8bc7] text-white hover:bg-[#3a6b9f] cursor-pointer transition"
+            className="block w-full h-12 rounded-md bg-primary text-white hover:bg-primary-hover cursor-pointer transition"
           >
             로그인
           </button>
           <button
             onClick={() => router.push(SIGNUP_PATH)}
-            className="block w-full h-12 rounded-md border border-[#a2d0ff] text-[#a2d0ff] hover:bg-[#7bb8ff] hover:text-white transition"
+            className="block w-full h-12 rounded-md border border-primary text-primary hover:bg-primary-hover hover:text-white transition"
           >
             회원가입
           </button>
