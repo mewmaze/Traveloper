@@ -8,7 +8,13 @@ const config: Config = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: '#a2d0ff',
+        'primary-hover': '#7bb8ff',
+        'primary-light': '#b8dcff',
+      },
+    },
   },
   plugins: [],
 };
