@@ -28,7 +28,7 @@ export default function TripsPage() {
   if (loading) return null;
 
   return (
-    <div>
+    <div className="flex justify-center flex-col items-center">
       <div className="flex justify-end mr-8 mb-4">
         <button
           className="bg-blue-500 text-white px-4 py-2 font-bold rounded-md hover:bg-blue-600 cursor-pointer"
@@ -37,7 +37,14 @@ export default function TripsPage() {
           여행 추가
         </button>
       </div>
-      {trips.length > 0 ? <TripList trips={trips} /> : <div>여행을 추가해 보세요!</div>}
+      {trips.length > 0 ? (
+        <TripList trips={trips} />
+      ) : (
+        <div>
+          {' '}
+          <img src="/firstTrip.svg" alt="First Trip" />
+        </div>
+      )}
     </div>
   );
 }
