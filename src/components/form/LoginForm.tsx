@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createClient } from '../../utils/supabase/client';
-import AuthLayout from '../layout/AuthLayout';
 import AuthButton from '../auth/AuthButton';
 import AuthInput from '../auth/AuthInput';
 
@@ -38,7 +37,7 @@ export default function LoginForm() {
   };
 
   return (
-    <AuthLayout>
+    <div>
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)} noValidate>
         <AuthInput
           {...register('email')}
@@ -64,6 +63,6 @@ export default function LoginForm() {
           </a>
         </p>
       </div>
-    </AuthLayout>
+    </div>
   );
 }

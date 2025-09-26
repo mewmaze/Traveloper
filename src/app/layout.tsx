@@ -30,9 +30,7 @@ export default async function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers countries={countries}>
-          <AuthHeaderWrapper>
-            <div className="p-8">{children}</div>
-          </AuthHeaderWrapper>
+          <AuthHeaderWrapper>{children}</AuthHeaderWrapper>
         </Providers>
       </body>
     </html>

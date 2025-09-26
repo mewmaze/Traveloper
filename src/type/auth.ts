@@ -3,6 +3,7 @@ import type { User } from '@supabase/supabase-js';
 export interface AuthContextType {
   user: User | null;
   setUser: (user: User | null) => void;
+  loading: boolean;
 }
 
 export interface AuthInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
