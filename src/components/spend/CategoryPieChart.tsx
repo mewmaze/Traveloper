@@ -62,6 +62,7 @@ export default function CategoryPieChart({ tripId }: CategoryPieChartProps) {
           cx="50%"
           cy="50%"
           labelLine={false}
+          /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
           label={({ name, percent }: any) => `${name} ${(percent * 100).toFixed(0)}%`}
           outerRadius={100}
           fill="#8884d8"
