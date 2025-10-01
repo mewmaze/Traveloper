@@ -20,15 +20,15 @@ export default async function TripDetailPage({ params, searchParams }: TripDetai
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-screen overflow-hidden">
       <div className="flex justify-between items-center p-2 border-b">
         <SpendSummary tripId={id} />
         <SpendActions tripId={id} />
       </div>
-      <div className="flex-1 mt-2">
+      <div className="flex-1 overflow-hidden pb-20">
         <SpendList tripId={id} data={data} selectedDay={day} />
       </div>
-      <div className="sticky bottom-8">
+      <div className="fixed bottom-0 left-0 right-0">
         <SpendInputForm tripId={id} />
       </div>
     </div>
