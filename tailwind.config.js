@@ -7,6 +7,7 @@ module.exports = {
         primary: '#a2d0ff',
         'primary-hover': '#7bb8ff',
         'primary-light': '#b8dcff',
+        'primary-text': '#05396e',
       },
     },
   },
