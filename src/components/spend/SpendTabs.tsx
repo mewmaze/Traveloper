@@ -10,7 +10,7 @@ interface SpendTabsProps {
 
 export default function SpendTabs({ currentDay, totalDays, onDayChange }: SpendTabsProps) {
   return (
-    <div className="overflow-x-auto scrollbar-hide">
+    <div className="overflow-x-auto scrollbar-hide ml-2">
       <div className="flex gap-2 mb-2">
         <button
           className={`px-4 py-2 rounded whitespace-nowrap flex-shrink-0 ${currentDay === 'all' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}

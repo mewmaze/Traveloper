@@ -12,7 +12,7 @@ export default function Header() {
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   return (
     <>
-      <div className="relative bg-gray-100 min-h-14 flex items-center">
+      <div className="fixed top-0 left-0 right-0 z-50 relative bg-gray-100 min-h-14 flex items-center">
         {/* 좌측 padding 요소 */}
         <div className="px-6">{user?.user_metadata?.nickname}</div>
         {/* 로고는 중앙 절대 위치 */}

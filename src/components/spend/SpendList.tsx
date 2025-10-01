@@ -41,22 +41,24 @@ export default function SpendList({ tripId, data, selectedDay }: SpendListProps)
   const currentSpends = getCurrentSpends();
   console.log(data);
   return (
-    <div>
+    <div className="flex flex-col h-full pt-2">
       <SpendTabs
         currentDay={currentDay}
         totalDays={data.tripInfo.totalDays}
         spendsByDay={data.spendsByDay}
         onDayChange={handleDayChange}
       />
-      <div className="flex px-3 py-2 bg-gray-50 justify-center items-center mb-2 font-bold">
-        <div className="flex-1 px-2 border-r border-gray-300">결제</div>
-        <div className="flex-[1.5] px-2 border-r border-gray-300">금액</div>
-        <div className="flex-1 px-2 border-r border-gray-300">유형</div>
-        <div className="flex-[2.5] px-2">메모</div>
+      <div className="flex px-2 py-2 bg-gray-50 justify-center items-center mb-2 font-bold pr-[calc(0.5rem+15px)]">
+        <div className="flex-1 px-2 border-r border-gray-300"> 결제</div>
+        <div className="flex-[1.5] px-2 border-r border-gray-300"> 금액</div>
+        <div className="flex-1 px-2 border-r border-gray-300"> 유형</div>
+        <div className="flex-[2.5] px-2 "> 메모</div>
       </div>
-      {currentSpends?.map((spend: SpendRecord) => (
-        <SpendItem key={spend.id} spend={spend} />
-      ))}
+      <div className="flex-1 overflow-y-auto">
+        {currentSpends?.map((spend: SpendRecord) => (
+          <SpendItem key={spend.id} spend={spend} />
+        ))}
+      </div>
     </div>
   );
 }
