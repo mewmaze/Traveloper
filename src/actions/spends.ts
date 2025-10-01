@@ -29,12 +29,15 @@ export async function getSpendByTrip(tripId: string) {
 
     //일자별 그룹핑
     const spendsByDay = groupSpendsByDay(spends || [], trip.start_date);
+    //일자별 총합 계산
+    const dailyTotals = calculateDailyTotals(spendsByDay);
     const totalDays = differenceInDays(new Date(trip.end_date), new Date(trip.start_date)) + 1;
 
     return {
       success: true,
       spends: spends || [],
       spendsByDay,
+      dailyTotals,
       tripInfo: { totalDays, start_date: trip.start_date, end_date: trip.end_date },
     };
   } catch (error) {
@@ -56,4 +59,12 @@ function groupSpendsByDay(spends: SpendRecord[], tripStartDate: string) {
     }
   });
   return grouped;
+}
+
+function calculateDailyTotals(spendsByDay: Record<number, SpendRecord[]>) {
+  const totals: Record<number, number> = {};
+  Object.entries(spendsByDay).forEach(([day, spends]) => {
+    totals[Number(day)] = spends.reduce((sum, spend) => sum + spend.amount, 0);
+  });
+  return totals;
 }
