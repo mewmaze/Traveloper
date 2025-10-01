@@ -48,11 +48,11 @@ export default function SpendList({ tripId, data, selectedDay }: SpendListProps)
         spendsByDay={data.spendsByDay}
         onDayChange={handleDayChange}
       />
-      <div className="flex px-3 py-2 bg-gray-50 items-center mb-2 font-bold">
-        <div className="flex-1 px-2 border-r border-gray-300">카드/현금</div>
-        <div className="flex-1 px-2 border-r border-gray-300">금액</div>
+      <div className="flex px-3 py-2 bg-gray-50 justify-center items-center mb-2 font-bold">
+        <div className="flex-1 px-2 border-r border-gray-300">결제</div>
+        <div className="flex-[1.5] px-2 border-r border-gray-300">금액</div>
         <div className="flex-1 px-2 border-r border-gray-300">유형</div>
-        <div className="flex-[3] px-2">메모</div>
+        <div className="flex-[2.5] px-2">메모</div>
       </div>
       {currentSpends?.map((spend: SpendRecord) => (
         <SpendItem key={spend.id} spend={spend} />
