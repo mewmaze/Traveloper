@@ -21,11 +21,11 @@ export default async function TripDetailPage({ params, searchParams }: TripDetai
 
   return (
     <div className="flex flex-col h-screen overflow-hidden">
-      <div className="flex justify-between items-center p-2 border-b">
+      <div className="flex justify-between items-center px-4 py-1 border-b">
         <SpendSummary tripId={id} />
         <SpendActions tripId={id} />
       </div>
-      <div className="flex-1 overflow-hidden pb-20">
+      <div className="flex-1 overflow-hidden pb-14">
         <SpendList tripId={id} data={data} selectedDay={day} />
       </div>
       <div className="fixed bottom-0 left-0 right-0">

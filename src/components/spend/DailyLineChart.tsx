@@ -62,8 +62,8 @@ export default function DailyLineChart({ tripId }: DailyLineChartProps) {
           <XAxis dataKey="date" tick={{ dy: 10 }} />
           <YAxis />
           <Tooltip
-            formatter={(value: number) => `${value.toLocaleString()}원`}
-            labelFormatter={(label) => `날짜: ${label}`}
+            formatter={(value: number) => [`${value.toLocaleString()}원`]}
+            labelFormatter={(label) => `${label}`}
           />
           <Line
             type="monotone"

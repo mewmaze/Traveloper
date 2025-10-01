@@ -69,17 +69,36 @@ export default function NewTrip() {
   };
 
   return (
-    <form
-      className="flex flex-col gap-8 p-6 bg-white rounded-lg shadow w-full max-w-lg mx-auto"
-      onSubmit={handleSubmit(onSubmit)}
-    >
-      <TripInfoFields register={register} control={control} errors={errors} />
-      <button
-        type="submit"
-        className="bg-blue-500 text-white px-4 py-2 font-bold rounded-md hover:bg-blue-600 cursor-pointer"
-      >
-        여행 추가
-      </button>
-    </form>
+    <div className="min-h-screen bg-gray-50 py-8">
+      <div className="max-w-2xl mx-auto px-4">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-primary-text mb-2">새 여행 추가</h1>
+          <p className="text-gray-600 text-sm">여행 정보를 입력해주세요</p>
+        </div>
+
+        <form
+          className="bg-white rounded-xl shadow-sm p-6 space-y-6"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <TripInfoFields register={register} control={control} errors={errors} />
+
+          <div className="flex gap-3 pt-4">
+            <button
+              type="button"
+              onClick={() => router.back()}
+              className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition"
+            >
+              취소
+            </button>
+            <button
+              type="submit"
+              className="flex-1 px-4 py-3 bg-primary hover:bg-primary-hover text-white font-semibold rounded-lg transition shadow-sm"
+            >
+              여행 추가
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   );
 }

@@ -33,14 +33,14 @@ export default async function SpendSummary({ tripId }: { tripId: string }) {
     .single();
   const totalSpend = totalSpendData?.sum || 0;
   return (
-    <div className="flex gap-2">
-      <div className="bg-green-100 flex gap-2 px-4 py-2">
-        <span>남은 현금</span>
-        <span>{remainCash} </span>
+    <div className="flex gap-4 items-center">
+      <div className="flex items-center gap-2 px-3 py-2 bg-blue-50 rounded-lg">
+        <span className="text-xs text-gray-600">남은 현금</span>
+        <span className="text-lg font-bold text-primary-text">{remainCash.toLocaleString()}원</span>
       </div>
-      <div className="bg-red-100 flex gap-2 px-4 py-2">
-        <span>총 지출</span>
-        <span>{totalSpend} </span>
+      <div className="flex items-center gap-2 px-3 py-2 bg-indigo-50 rounded-lg">
+        <span className="text-xs text-gray-600">총 지출</span>
+        <span className="text-lg font-bold text-primary-text">{totalSpend.toLocaleString()}원</span>
       </div>
     </div>
   );
