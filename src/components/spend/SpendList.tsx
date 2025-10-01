@@ -12,6 +12,7 @@ interface SpendListProps {
     success: boolean;
     spends: SpendRecord[];
     spendsByDay: Record<number, SpendRecord[]>;
+    dailyTotals: Record<number, number>;
     tripInfo: {
       totalDays: number;
       start_date: string;
@@ -38,7 +39,7 @@ export default function SpendList({ tripId, data, selectedDay }: SpendListProps)
   };
 
   const currentSpends = getCurrentSpends();
-
+  console.log(data);
   return (
     <div>
       <SpendTabs
