@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { createSpendRecourd } from '../../app/trips/[id]/actions';
+import { ArrowUp } from 'lucide-react';
+
 const spendInputScheme = z.object({
   category: z.string(),
   amount: z.number(),
@@ -33,13 +35,13 @@ export default function SpendInputForm({ tripId }: { tripId: string }) {
   };
 
   return (
-    <form className="bg-white border-t shadow-lg" onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex items-center px-5 py-3 gap-0">
+    <form className="bg-white border-t border-gray-200" onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex items-center px-1 py-2">
         <input type="hidden" name="trip_id" value={tripId} />
 
         <select
           {...register('expense_method')}
-          className="flex-1 px-3 py-2 border-0 bg-transparent text-sm focus:outline-none focus:ring-0"
+          className="flex-1 min-w-0 px-2 py-1.5 text-xs text-gray-600 bg-transparent border-0 focus:outline-none"
         >
           <option value="">결제</option>
           <option value="cash">현금</option>
@@ -48,13 +50,14 @@ export default function SpendInputForm({ tripId }: { tripId: string }) {
 
         <input
           {...register('amount', { valueAsNumber: true })}
+          type="number"
           placeholder="금액"
-          className="flex-[1.5] px-3 py-2 border-0 bg-transparent text-sm text-right focus:outline-none focus:ring-0"
+          className="flex-[1.5] min-w-0 px-2 py-1.5 text-xs text-right text-gray-600 placeholder:text-gray-400 bg-transparent border-0 focus:outline-none"
         />
 
         <select
           {...register('category')}
-          className="flex-1 px-3 py-2 border-0 bg-transparent text-sm text-center focus:outline-none focus:ring-0"
+          className="flex-1 min-w-0 px-2 py-1.5 text-xs text-center text-gray-600 bg-transparent border-0 focus:outline-none"
         >
           <option value="">유형</option>
           <option value="식사">식사</option>
@@ -66,14 +69,14 @@ export default function SpendInputForm({ tripId }: { tripId: string }) {
         <input
           {...register('memo')}
           placeholder="메모"
-          className="flex-[2.5] px-3 py-2 border-0 bg-transparent text-sm focus:outline-none focus:ring-0"
+          className="flex-[2.5] min-w-0 px-2 py-1.5 text-xs text-gray-600 placeholder:text-gray-400 bg-transparent border-0 focus:outline-none"
         />
 
         <button
           type="submit"
-          className="ml-2 px-4 py-2 bg-primary text-white rounded-lg text-sm font-medium hover:bg-primary-hover transition"
+          className="p-2 bg-primary hover:bg-primary-hover rounded-full transition ml-2"
         >
-          등록
+          <ArrowUp size={16} color="white" strokeWidth={2.5} />
         </button>
       </div>
     </form>

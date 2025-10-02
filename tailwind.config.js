@@ -8,6 +8,7 @@ module.exports = {
         'primary-hover': '#7bb8ff',
         'primary-light': '#b8dcff',
         'primary-text': '#05396e',
+        'cash-gold': '#eeac35',
       },
     },
   },
