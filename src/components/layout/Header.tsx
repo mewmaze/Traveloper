@@ -42,6 +42,7 @@ export default function Header() {
             <Settings size={24} color="#05396e" strokeWidth={2} />
           </button>
         </div>
+        <SettingsPanel isOpen={isSettingsOpen} onClose={() => setIsSettingsOpen(false)} />
       </div>
     </>
   );
