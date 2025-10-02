@@ -7,13 +7,27 @@ const expenseMethodMap: Record<string, string> = {
 
 export default function SpendItem({ spend }: { spend: SpendRecord }) {
   return (
-    <div className="flex px-3 py-3 bg-gray-50 items-center">
-      <div className="flex-1 px-2 border-r border-gray-300">
-        {expenseMethodMap[spend.expense_method]}
+    <div className="bg-white border border-gray-100 rounded-lg p-3 mb-2 mx-3 hover:shadow-md transition">
+      <div className="flex items-center">
+        <div className="flex-1 px-2">
+          <span
+            className={`inline-block w-2 h-2 rounded-full mr-2 ${
+              spend.expense_method === 'card' ? 'bg-[#739de8]' : 'bg-[#eeac35]'
+            }`}
+          ></span>
+          <span className="text-sm">{spend.expense_method === 'card' ? '카드' : '현금'}</span>
+        </div>
+
+        <div className="flex-[1.5] px-2 text-right font-semibold text-primary-text">
+          {spend.amount.toLocaleString()}원
+        </div>
+
+        <div className="flex-1 px-2 text-center">
+          <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">{spend.category}</span>
+        </div>
+
+        <div className="flex-[2.5] px-2 text-sm text-gray-600 truncate">{spend.memo}</div>
       </div>
-      <div className="flex-[1.5] px-2 border-r border-gray-300">{spend.amount}</div>
-      <div className="flex-1 px-2 border-r border-gray-300">{spend.category}</div>
-      <div className="flex-[2.5] px-2  break-words line-clamp-2">{spend.memo}</div>
     </div>
   );
 }
