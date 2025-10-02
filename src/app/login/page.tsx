@@ -10,8 +10,8 @@ export default function LoginPage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="w-full max-w-md space-y-8">
+    <div className="h-screen flex flex-col items-center justify-center px-6 -mt-14">
+      <div className="w-full max-w-sm space-y-8">
         <AnimatedLogo />
         <div
           className={`transition-all duration-1000 ease-out ${showLoginForm ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
