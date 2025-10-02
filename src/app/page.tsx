@@ -23,8 +23,8 @@ export default function Home() {
   if (authLoading || user) return null;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="w-full max-w-md space-y-8">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 -mt-14">
+      <div className="w-full max-w-sm space-y-8">
         <AnimatedLogo />
         <div
           className={`space-y-4 mt-12 transition-all duration-1000 ease-out ${
