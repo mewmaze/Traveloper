@@ -48,7 +48,7 @@ export default function TripsPage() {
           </>
         ) : (
           <div className="flex flex-col items-center justify-center mt-20">
-            <img src="/firsttrip.svg" alt="First Trip" className="mb-6" />
+            <img src="/firstTrip.svg" alt="First Trip" className="mb-6" />
             <button
               className="bg-primary hover:bg-primary-hover text-white px-6 py-3 font-semibold rounded-lg transition shadow-sm"
               onClick={() => router.push(NEW_TRIP_PATH)}
