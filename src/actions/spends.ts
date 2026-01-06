@@ -2,7 +2,7 @@
 
 import { createClient } from '../utils/supabase/server';
 import type { SpendRecord } from '../type/spend';
-import { differenceInDays } from 'date-fns';
+import { differenceInDays, parseISO, startOfDay } from 'date-fns';
 
 export async function getSpendByTrip(tripId: string) {
   const supabase = await createClient();
@@ -58,18 +58,21 @@ export async function getSpendByTrip(tripId: string) {
 }
 
 function groupSpendsByDay(spends: SpendRecord[], tripStartDate: string) {
-  const startDate = new Date(tripStartDate);
+  const startDate = startOfDay(parseISO(tripStartDate));
   const grouped: Record<number, SpendRecord[]> = {};
 
   spends.forEach((spend) => {
-    const dateToUse = spend.date || spend.created_at.split('T')[0];
-    const spendDate = new Date(dateToUse);
+    const dateStr = spend.date || spend.created_at.split('T')[0];
+    const spendDate = startOfDay(parseISO(dateStr));
+
     const dayNumber = differenceInDays(spendDate, startDate) + 1;
+
     if (dayNumber >= 1) {
       if (!grouped[dayNumber]) grouped[dayNumber] = [];
       grouped[dayNumber].push(spend);
     }
   });
+
   return grouped;
 }
 
