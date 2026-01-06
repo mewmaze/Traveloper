@@ -19,6 +19,8 @@ export default async function TripDetailPage({ params, searchParams }: TripDetai
     return <div>지출 내역을 불러올 수 없습니다.</div>;
   }
 
+  const isAllTab = day === 'all';
+
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <div className="flex justify-between items-center px-1 sm:px-4 py-1 border-b">
@@ -28,9 +30,15 @@ export default async function TripDetailPage({ params, searchParams }: TripDetai
       <div className="flex-1 overflow-hidden pb-14">
         <SpendList tripId={id} data={data} selectedDay={day} />
       </div>
-      <div className="fixed bottom-0 left-0 right-0">
-        <SpendInputForm tripId={id} />
-      </div>
+      {!isAllTab && (
+        <div className="fixed bottom-0 left-0 right-0">
+          <SpendInputForm
+            tripId={id}
+            selectedDay={Number(day)}
+            startDate={data.tripInfo.start_date}
+          />
+        </div>
+      )}
     </div>
   );
 }

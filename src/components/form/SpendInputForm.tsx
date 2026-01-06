@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { createSpendRecourd } from '../../app/trips/[id]/actions';
+import { createSpendRecord } from '../../app/trips/[id]/actions';
 import { ArrowUp } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
 
 const spendInputScheme = z.object({
   category: z.string(),
@@ -13,7 +14,17 @@ const spendInputScheme = z.object({
   memo: z.string().optional(),
 });
 export type SpendInputForm = z.infer<typeof spendInputScheme>;
-export default function SpendInputForm({ tripId }: { tripId: string }) {
+export default function SpendInputForm({
+  tripId,
+  selectedDay,
+  startDate,
+}: {
+  tripId: string;
+  selectedDay: number;
+  startDate: string;
+}) {
+  const searchParams = useSearchParams();
+  const currentDate = searchParams.get('date') || 'all';
   const router = useRouter();
   const {
     register,
@@ -25,7 +36,11 @@ export default function SpendInputForm({ tripId }: { tripId: string }) {
   });
 
   const onSubmit = async (data: SpendInputForm) => {
-    const result = await createSpendRecourd({ ...data, trip_id: tripId });
+    const date = new Date(startDate);
+    date.setDate(date.getDate() + selectedDay - 1);
+
+    const formattedDate = date.toISOString().split('T')[0];
+    const result = await createSpendRecord({ ...data, trip_id: tripId, date: formattedDate });
     if (result.success) {
       router.refresh(); // SpendList 즉시 갱신
       reset();
