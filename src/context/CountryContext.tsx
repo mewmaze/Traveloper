@@ -1,7 +1,6 @@
 'use client';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import type { Country } from '../type/country';
-import type { CountryApiItem } from '../type/country';
 
 export const CountryContext = createContext<Country[]>([]);
 

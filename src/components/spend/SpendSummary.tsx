@@ -1,12 +1,9 @@
 import { createClient } from '../../utils/supabase/server';
 export default async function SpendSummary({ tripId }: { tripId: string }) {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
 
   //총 환전액
-  const { data: totalExchangeData, error } = await supabase
+  const { data: totalExchangeData } = await supabase
     .from('exchange_records')
     .select('amount.sum()')
     .eq('trip_id', Number(tripId))

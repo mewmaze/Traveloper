@@ -72,7 +72,9 @@ export default function CategoryPieChart({ tripId }: CategoryPieChartProps) {
             <Cell key={`cell-${entry.name}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip formatter={(value: number) => `${value.toLocaleString()}원`} />
+        <Tooltip
+          formatter={(value?: number) => (value !== undefined ? `${value.toLocaleString()}원` : '')}
+        />
         <Legend />
       </PieChart>
     </ResponsiveContainer>

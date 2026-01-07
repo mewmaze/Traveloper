@@ -5,6 +5,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { Settings } from 'lucide-react';
 import SettingsPanel from '../settings/SettingsPanel';
 import { ROOT_PATH } from '../../constants/routes';
+import Image from 'next/image';
 
 export default function Header() {
   const { user } = useAuth();
@@ -25,7 +26,7 @@ export default function Header() {
 
         {/* 로고 */}
         <div className="absolute inset-0 flex justify-center items-center cursor-pointer pointer-events-none">
-          <img
+          <Image
             src="/logo.svg"
             alt="Logo"
             className="h-full w-auto pointer-events-auto"

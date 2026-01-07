@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { createSpendRecord } from '../../app/trips/[id]/actions';
 import { ArrowUp } from 'lucide-react';
-import { useSearchParams } from 'next/navigation';
 
 const spendInputScheme = z.object({
   category: z.string(),
@@ -23,15 +22,8 @@ export default function SpendInputForm({
   selectedDay: number;
   startDate: string;
 }) {
-  const searchParams = useSearchParams();
-  const currentDate = searchParams.get('date') || 'all';
   const router = useRouter();
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<SpendInputForm>({
+  const { register, handleSubmit, reset } = useForm<SpendInputForm>({
     resolver: zodResolver(spendInputScheme),
   });
 
@@ -45,7 +37,7 @@ export default function SpendInputForm({
       router.refresh(); // SpendList 즉시 갱신
       reset();
     } else {
-      alert('등록 실패: ' + result.error);
+      alert('등록 실패: ' + result.error?.message);
     }
   };
 

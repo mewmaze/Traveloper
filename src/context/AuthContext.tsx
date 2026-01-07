@@ -3,7 +3,6 @@ import { createContext, useEffect, useState } from 'react';
 import type { AuthContextType } from '../type/auth';
 import type { User } from '@supabase/supabase-js';
 import { createClient } from '../utils/supabase/client';
-import { set } from 'zod';
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
