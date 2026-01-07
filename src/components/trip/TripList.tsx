@@ -1,4 +1,3 @@
-import { NEW_TRIP_PATH } from '../../constants/routes';
 import type { Trip } from '../../type/trip';
 import TripItem from './TripItem';
 

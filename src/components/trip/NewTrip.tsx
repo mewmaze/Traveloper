@@ -6,7 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../../hooks/useAuth';
 import { ROOT_PATH } from '../../constants/routes';
-import type { Country } from '../../type/country';
 import 'react-datepicker/dist/react-datepicker.css';
 import TripInfoFields from '../form/TripInfoFields';
 

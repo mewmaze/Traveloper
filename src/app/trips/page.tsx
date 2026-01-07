@@ -6,6 +6,7 @@ import type { Trip } from '../../type/trip';
 import { createClient } from '../../utils/supabase/client';
 import { NEW_TRIP_PATH } from '../../constants/routes';
 import TripList from '../../components/trip/TripList';
+import Image from 'next/image';
 
 export default function TripsPage() {
   const { user } = useAuth();
@@ -20,7 +21,7 @@ export default function TripsPage() {
       .from('trips')
       .select('*')
       .eq('user_id', user.id)
-      .then(({ data, error }) => {
+      .then(({ data }) => {
         if (data) setTrips(data);
         setLoading(false);
       });
@@ -48,7 +49,7 @@ export default function TripsPage() {
           </>
         ) : (
           <div className="flex flex-col items-center justify-center mt-20">
-            <img src="/firstTrip.svg" alt="First Trip" className="mb-6" />
+            <Image src="/firstTrip.svg" alt="First Trip" className="mb-6" />
             <button
               className="bg-primary hover:bg-primary-hover text-white px-6 py-3 font-semibold rounded-lg transition shadow-sm"
               onClick={() => router.push(NEW_TRIP_PATH)}

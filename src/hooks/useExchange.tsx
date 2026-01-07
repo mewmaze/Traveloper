@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { createClient } from '../utils/supabase/client';
-import countryToCurrency, { Currencies, Countries } from 'country-to-currency';
+import countryToCurrency from 'country-to-currency';
 
 export const useExchange = (tripId?: number) => {
   const [exchangeRate, setExchangeRate] = useState<number | null>(null);
