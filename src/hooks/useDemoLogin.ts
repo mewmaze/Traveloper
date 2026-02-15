@@ -6,8 +6,8 @@ export const useDemoLogin = () => {
 
   const demoLogin = async () => {
     const { error } = await supabase.auth.signInWithPassword({
-      email: 'demo@traveloper.com',
-      password: 'demo1234!',
+      email: process.env.NEXT_PUBLIC_DEMO_EMAIL!,
+      password: process.env.NEXT_PUBLIC_DEMO_PASSWORD!,
     });
     if (error) {
       console.error('데모 로그인 실패:', error.message);
