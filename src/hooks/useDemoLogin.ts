@@ -1,8 +1,10 @@
 import { useRouter } from 'next/navigation';
 import { createClient } from '../utils/supabase/client';
+import { useToast } from './useToast';
 export const useDemoLogin = () => {
   const router = useRouter();
   const supabase = createClient();
+  const { showToast } = useToast();
 
   const demoLogin = async () => {
     const { error } = await supabase.auth.signInWithPassword({
@@ -10,7 +12,7 @@ export const useDemoLogin = () => {
       password: process.env.NEXT_PUBLIC_DEMO_PASSWORD!,
     });
     if (error) {
-      console.error('데모 로그인 실패:', error.message);
+      showToast('데모 로그인에 실패했습니다.', 'error');
       return;
     }
     router.push('/trips');
