@@ -40,6 +40,7 @@ export default function ExchangeInfoFields() {
     if (error) {
       showToast('환전 저장에 실패했습니다.', 'error');
     } else {
+      showToast('환전이 추가되었습니다!');
       router.push(`/trips/${tripId}`);
     }
   };
