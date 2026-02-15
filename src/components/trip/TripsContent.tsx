@@ -29,7 +29,13 @@ export default function TripsContent({ trips }: { trips: Trip[] }) {
           </>
         ) : (
           <div className="flex flex-col items-center justify-center mt-20">
-            <Image src="/firstTrip.svg" alt="First Trip" width={300} height={200} className="mb-6" />
+            <Image
+              src="/firstTrip.svg"
+              alt="First Trip"
+              width={300}
+              height={200}
+              className="mb-6"
+            />
             <button
               className="bg-primary hover:bg-primary-hover text-primary-text px-6 py-3 font-semibold rounded-lg transition shadow-sm"
               onClick={() => router.push(NEW_TRIP_PATH)}
