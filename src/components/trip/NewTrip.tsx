@@ -91,7 +91,7 @@ export default function NewTrip() {
             </button>
             <button
               type="submit"
-              className="flex-1 px-4 py-3 bg-primary hover:bg-primary-hover text-white font-semibold rounded-lg transition shadow-sm"
+              className="flex-1 px-4 py-3 bg-primary hover:bg-primary-hover text-primary-text font-semibold rounded-lg transition shadow-sm"
             >
               여행 추가
             </button>

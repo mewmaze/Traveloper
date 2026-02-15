@@ -40,7 +40,7 @@ export default function Home() {
           </button>
           <button
             onClick={() => router.push(SIGNUP_PATH)}
-            className="block w-full h-12 rounded-md border border-primary text-primary hover:bg-primary-hover hover:text-white transition"
+            className="block w-full h-12 rounded-md border border-primary text-primary hover:bg-primary-hover hover:text-primary-text transition"
           >
             회원가입
           </button>

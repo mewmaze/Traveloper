@@ -13,7 +13,7 @@ export default function SpendTabs({ currentDay, totalDays, onDayChange }: SpendT
     <div className="overflow-x-auto scrollbar-hide ml-2">
       <div className="flex gap-2 mb-2">
         <button
-          className={`px-4 py-1.5 rounded-full whitespace-nowrap flex-shrink-0 text-sm font-medium transition-all ${currentDay === 'all' ? 'bg-primary text-white shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
+          className={`px-4 py-1.5 rounded-full whitespace-nowrap flex-shrink-0 text-sm font-medium transition-all ${currentDay === 'all' ? 'bg-primary text-primary-text shadow-md' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
           onClick={() => onDayChange('all')}
         >
           전체
@@ -25,7 +25,7 @@ export default function SpendTabs({ currentDay, totalDays, onDayChange }: SpendT
               key={dayNumber}
               className={`px-4 py-1.5 rounded-full whitespace-nowrap flex-shrink-0 text-sm font-medium transition-all ${
                 currentDay === dayNumber.toString()
-                  ? 'bg-primary text-white shadow-md'
+                  ? 'bg-primary text-primary-text shadow-md'
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
               onClick={() => onDayChange(dayNumber.toString())}

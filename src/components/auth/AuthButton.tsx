@@ -6,7 +6,7 @@ export default function AuthButton({ text }: AuthButtonProps) {
   return (
     <button
       type="submit"
-      className="block w-full h-12 rounded-md bg-primary text-white font-bold hover:bg-primary-hover cursor-pointer transition"
+      className="block w-full h-12 rounded-md bg-primary text-primary-text font-bold hover:bg-primary-hover cursor-pointer transition"
     >
       {text}
     </button>
