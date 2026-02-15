@@ -26,7 +26,31 @@ export default function TripsPage() {
         setLoading(false);
       });
   }, [user]);
-  if (loading) return null;
+  if (loading)
+    return (
+      <div className="min-h-screen bg-gray-50 py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex justify-between items-center mb-8">
+            <div>
+              <div className="h-8 w-32 bg-gray-200 rounded animate-pulse" />
+              <div className="h-4 w-20 bg-gray-200 rounded animate-pulse mt-2" />
+            </div>
+            <div className="h-10 w-28 bg-gray-200 rounded-lg animate-pulse" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="bg-white rounded-xl border border-gray-100 overflow-hidden">
+                <div className="h-14 bg-gray-200 animate-pulse" />
+                <div className="p-4">
+                  <div className="h-5 w-3/4 bg-gray-200 rounded animate-pulse mb-3" />
+                  <div className="h-4 w-1/2 bg-gray-200 rounded animate-pulse" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -49,7 +73,7 @@ export default function TripsPage() {
           </>
         ) : (
           <div className="flex flex-col items-center justify-center mt-20">
-            <Image src="/firstTrip.svg" alt="First Trip" className="mb-6" />
+            <Image src="/firstTrip.svg" alt="First Trip" width={300} height={200} className="mb-6" />
             <button
               className="bg-primary hover:bg-primary-hover text-white px-6 py-3 font-semibold rounded-lg transition shadow-sm"
               onClick={() => router.push(NEW_TRIP_PATH)}
