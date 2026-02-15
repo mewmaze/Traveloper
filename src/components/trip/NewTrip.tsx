@@ -8,6 +8,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { ROOT_PATH } from '../../constants/routes';
 import 'react-datepicker/dist/react-datepicker.css';
 import TripInfoFields from '../form/TripInfoFields';
+import { useToast } from '../../hooks/useToast';
 
 const tripSchema = z.object({
   countryCode: z.string().min(1, '국가를 선택해주세요'),
@@ -46,6 +47,7 @@ export default function NewTrip() {
       dateRange: [undefined, undefined],
     },
   });
+  const { showToast } = useToast();
   const onSubmit = async (data: TripForm) => {
     const supabase = createClient();
 
@@ -60,9 +62,9 @@ export default function NewTrip() {
       },
     ]);
     if (error) {
-      alert('저장실패:' + error.message);
+      showToast('저장에 실패했습니다.', 'error');
     } else {
-      alert('여행이 등록되었습니다!');
+      showToast('여행이 등록되었습니다!');
       router.push(ROOT_PATH);
     }
   };

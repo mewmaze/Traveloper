@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
 import { createSpendRecord } from '../../app/trips/[id]/actions';
 import { ArrowUp } from 'lucide-react';
+import { useToast } from '../../hooks/useToast';
 
 const spendInputScheme = z.object({
   category: z.string(),
@@ -23,6 +24,7 @@ export default function SpendInputForm({
   startDate: string;
 }) {
   const router = useRouter();
+  const { showToast } = useToast();
   const { register, handleSubmit, reset } = useForm<SpendInputForm>({
     resolver: zodResolver(spendInputScheme),
   });
@@ -37,7 +39,7 @@ export default function SpendInputForm({
       router.refresh(); // SpendList 즉시 갱신
       reset();
     } else {
-      alert('등록 실패: ' + result.error?.message);
+      showToast('등록에 실패했습니다.', 'error');
     }
   };
 

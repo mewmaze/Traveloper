@@ -20,7 +20,6 @@ export const useExchange = (tripId?: number) => {
       if (!trip) return;
 
       const code = (countryToCurrency as Record<string, string>)[trip.countryCode];
-      console.log('code:', code);
       setCurrencyCode(code);
 
       const response = await fetch(

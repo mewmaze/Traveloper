@@ -6,6 +6,7 @@ import { createClient } from '../../utils/supabase/client';
 import { useExchange } from '../../hooks/useExchange';
 import { useAuth } from '../../hooks/useAuth';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useToast } from '../../hooks/useToast';
 const exchangeSchema = z.object({
   cashExchange: z.number(),
 });
@@ -24,6 +25,7 @@ export default function ExchangeInfoFields() {
   } = useForm<ExchangeForm>({
     resolver: zodResolver(exchangeSchema),
   });
+  const { showToast } = useToast();
   const onSubmit = async (data: ExchangeForm) => {
     const supabase = createClient();
     const { error } = await supabase.from('exchange_records').insert([
@@ -36,7 +38,7 @@ export default function ExchangeInfoFields() {
       },
     ]);
     if (error) {
-      alert('환전 저장 실패:' + error.message);
+      showToast('환전 저장에 실패했습니다.', 'error');
     } else {
       router.push(`/trips/${tripId}`);
     }
