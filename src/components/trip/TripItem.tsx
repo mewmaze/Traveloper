@@ -3,7 +3,6 @@ import { useRouter } from 'next/navigation';
 import { useCountries } from '../../hooks/useCountries';
 import type { Trip } from '../../type/trip';
 import { EXCHANGE_PATH } from '../../constants/routes';
-import Image from 'next/image';
 export default function TripItem({ trip }: { trip: Trip }) {
   const router = useRouter();
   const countries = useCountries();
@@ -19,10 +18,10 @@ export default function TripItem({ trip }: { trip: Trip }) {
           <div className="flex items-center gap-2">
             {countryInfo && (
               <>
-                <Image
-                  src={countryInfo.flag as string}
+                <img
+                  src={countryInfo.flag}
                   alt={`${countryInfo.name} 국기`}
-                  className="w-8 h-6 rounded shadow-sm"
+                  className="w-8 h-6 rounded shadow-sm object-cover"
                 />
                 <span className="text-primary-text font-semibold">{countryInfo.name}</span>
               </>
