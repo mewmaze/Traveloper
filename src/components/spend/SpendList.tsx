@@ -39,7 +39,6 @@ export default function SpendList({ tripId, data, selectedDay }: SpendListProps)
   };
 
   const currentSpends = getCurrentSpends();
-  console.log(data);
   return (
     <div className="flex flex-col h-full pt-2">
       <SpendTabs

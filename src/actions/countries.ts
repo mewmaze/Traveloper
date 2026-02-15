@@ -4,7 +4,7 @@ import { CountryApiItem } from '../type/country';
 export async function getCountries() {
   try {
     const response = await fetch(
-      `https://apis.data.go.kr/1262000/CountryFlagService2/getCountryFlagList2?serviceKey=${process.env.NEXT_PUBLIC_FLAG_API_KEY}&returnType=JSON&numOfRows=999`,
+      `https://apis.data.go.kr/1262000/CountryFlagService2/getCountryFlagList2?serviceKey=${process.env.FLAG_API_KEY}&returnType=JSON&numOfRows=999`,
     );
     const data = await response.json();
     const items = Array.isArray(data?.response.body?.items?.item)

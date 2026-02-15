@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createClient } from '../../utils/supabase/client';
 import AuthButton from '../auth/AuthButton';
 import AuthInput from '../auth/AuthInput';
+import { useToast } from '../../hooks/useToast';
 
 const loginScheme = z.object({
   email: z.email('올바른 이메일 형식이 아닙니다.'),
@@ -22,6 +23,7 @@ export default function LoginForm() {
     resolver: zodResolver(loginScheme),
   });
 
+  const { showToast } = useToast();
   const onSubmit = async (data: LoginForm) => {
     const supabase = createClient();
     const { email, password } = data;
@@ -30,7 +32,7 @@ export default function LoginForm() {
       password,
     });
     if (error) {
-      alert('로그인에 실패했습니다. 다시 시도해주세요.');
+      showToast('로그인에 실패했습니다. 다시 시도해주세요.', 'error');
     } else {
       window.location.href = '/';
     }

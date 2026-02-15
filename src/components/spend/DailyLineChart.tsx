@@ -71,6 +71,7 @@ export default function DailyLineChart({ tripId }: DailyLineChartProps) {
           <Line
             type="monotone"
             dataKey="amount"
+            name="금액"
             stroke="#8884d8"
             strokeWidth={2}
             dot={{ fill: '#8884d8', r: 4 }}

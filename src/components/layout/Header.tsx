@@ -29,6 +29,9 @@ export default function Header() {
           <Image
             src="/logo.svg"
             alt="Logo"
+            width={200}
+            height={50}
+            priority
             className="h-full w-auto pointer-events-auto"
             onClick={() => router.push(ROOT_PATH)}
           />
