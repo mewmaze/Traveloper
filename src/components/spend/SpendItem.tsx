@@ -22,7 +22,7 @@ export default function SpendItem({
         </div>
 
         <div className="flex-[1.5] px-2 text-right font-semibold text-primary-text text-sm">
-          {spend.amount.toLocaleString()} {currencyCode}
+          {spend.amount.toLocaleString()}
         </div>
 
         <div className="flex-1 px-2 text-center">
