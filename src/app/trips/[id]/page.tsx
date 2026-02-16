@@ -4,6 +4,7 @@ import SpendList from '../../../components/spend/SpendList';
 import SpendSummary from '../../../components/spend/SpendSummary';
 import SpendActions from '../../../components/spend/SpendActions';
 import { getSpendByTrip } from '../../../actions/spends';
+import { getCurrencyCode } from '../../../actions/exchange';
 
 interface TripDetailPageProps {
   params: Promise<{ id: string }>;
@@ -13,8 +14,8 @@ interface TripDetailPageProps {
 export default async function TripDetailPage({ params, searchParams }: TripDetailPageProps) {
   const { id } = await params;
   const { day = 'all' } = await searchParams;
-  const data = await getSpendByTrip(id);
-
+  const [data, currencyCode] = await Promise.all([getSpendByTrip(id), getCurrencyCode(Number(id))]);
+  const currency = currencyCode ?? '원';
   if (!data.success || !data.tripInfo) {
     return <div>지출 내역을 불러올 수 없습니다.</div>;
   }
@@ -24,11 +25,11 @@ export default async function TripDetailPage({ params, searchParams }: TripDetai
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <div className="flex justify-between items-center px-1 sm:px-4 py-1 border-b">
-        <SpendSummary tripId={id} />
+        <SpendSummary tripId={id} currencyCode={currency} />
         <SpendActions tripId={id} />
       </div>
       <div className="flex-1 overflow-hidden pb-14">
-        <SpendList tripId={id} data={data} selectedDay={day} />
+        <SpendList tripId={id} data={data} selectedDay={day} currencyCode={currency} />
       </div>
       {!isAllTab && (
         <div className="fixed bottom-0 left-0 right-0">

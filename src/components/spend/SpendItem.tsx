@@ -1,6 +1,12 @@
 import type { SpendRecord } from '../../type/spend';
 
-export default function SpendItem({ spend }: { spend: SpendRecord }) {
+export default function SpendItem({
+  spend,
+  currencyCode,
+}: {
+  spend: SpendRecord;
+  currencyCode: string;
+}) {
   return (
     <div className="bg-white border border-gray-100 rounded-lg p-3 mb-2 mx-3 hover:shadow-md transition">
       <div className="flex items-center">
@@ -16,7 +22,7 @@ export default function SpendItem({ spend }: { spend: SpendRecord }) {
         </div>
 
         <div className="flex-[1.5] px-2 text-right font-semibold text-primary-text text-sm">
-          {spend.amount.toLocaleString()}원
+          {spend.amount.toLocaleString()} {currencyCode}
         </div>
 
         <div className="flex-1 px-2 text-center">
