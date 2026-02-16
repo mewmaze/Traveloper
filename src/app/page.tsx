@@ -48,7 +48,7 @@ export default function Home() {
             onClick={() => demoLogin()}
             className="w-full text-center text-sm text-gray-500 hover:text-primary underline underline-offset-4 transition py-3"
           >
-            데모 계정으로 둘러보기
+            게스트로 체험하기
           </button>
         </div>
       </div>
