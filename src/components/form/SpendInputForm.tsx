@@ -51,7 +51,7 @@ export default function SpendInputForm({
 
         <select
           {...register('expense_method')}
-          className="flex-1 min-w-0 px-2 py-1.5 text-xs text-gray-600 bg-transparent border-0 focus:outline-none"
+          className="flex-1 min-w-0 px-2 py-2 text-sm text-gray-600 bg-transparent border-0 focus:outline-none"
         >
           <option value="">결제</option>
           <option value="cash">현금</option>
@@ -62,12 +62,12 @@ export default function SpendInputForm({
           {...register('amount', { valueAsNumber: true })}
           type="number"
           placeholder="금액"
-          className="flex-[1.5] min-w-0 px-2 py-1.5 text-xs text-right text-gray-600 placeholder:text-gray-400 bg-transparent border-0 focus:outline-none"
+          className="flex-[1.5] min-w-0 px-2 py-2 text-sm text-right text-gray-600 placeholder:text-gray-400 bg-transparent border-0 focus:outline-none"
         />
 
         <select
           {...register('category')}
-          className="flex-1 min-w-0 px-2 py-1.5 text-xs text-center text-gray-600 bg-transparent border-0 focus:outline-none"
+          className="flex-[1.2] min-w-[4rem] px-2 py-2 text-sm text-center text-gray-600 bg-transparent border-0 focus:outline-none"
         >
           <option value="">유형</option>
           <option value="식사">식사</option>
@@ -79,7 +79,7 @@ export default function SpendInputForm({
         <input
           {...register('memo')}
           placeholder="메모"
-          className="flex-[2.5] min-w-0 px-2 py-1.5 text-xs text-gray-600 placeholder:text-gray-400 bg-transparent border-0 focus:outline-none"
+          className="flex-[2] min-w-0 px-2 py-2 text-sm text-gray-600 placeholder:text-gray-400 bg-transparent border-0 focus:outline-none"
         />
 
         <button
