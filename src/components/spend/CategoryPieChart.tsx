@@ -7,9 +7,10 @@ const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82ca9d'
 
 interface CategoryPieChartProps {
   tripId: string;
+  currencyCode: string;
 }
 
-export default function CategoryPieChart({ tripId }: CategoryPieChartProps) {
+export default function CategoryPieChart({ tripId, currencyCode }: CategoryPieChartProps) {
   const [chartData, setChartData] = useState<{ name: string; value: number }[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -73,7 +74,9 @@ export default function CategoryPieChart({ tripId }: CategoryPieChartProps) {
           ))}
         </Pie>
         <Tooltip
-          formatter={(value?: number) => (value !== undefined ? `${value.toLocaleString()}원` : '')}
+          formatter={(value?: number) =>
+            value !== undefined ? `${value.toLocaleString()} ${currencyCode}` : ''
+          }
         />
         <Legend />
       </PieChart>

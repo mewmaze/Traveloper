@@ -20,8 +20,9 @@ interface SpendListProps {
     };
   };
   selectedDay: string;
+  currencyCode: string;
 }
-export default function SpendList({ tripId, data, selectedDay }: SpendListProps) {
+export default function SpendList({ tripId, data, selectedDay, currencyCode }: SpendListProps) {
   const router = useRouter();
   const [currentDay, setCurrentDay] = useState(selectedDay);
 
@@ -55,7 +56,7 @@ export default function SpendList({ tripId, data, selectedDay }: SpendListProps)
       </div>
       <div className="flex-1 overflow-y-auto">
         {currentSpends?.map((spend: SpendRecord) => (
-          <SpendItem key={spend.id} spend={spend} />
+          <SpendItem key={spend.id} spend={spend} currencyCode={currencyCode} />
         ))}
       </div>
     </div>

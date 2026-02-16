@@ -2,6 +2,19 @@
 import { createClient } from '../utils/supabase/server';
 import countryToCurrency from 'country-to-currency';
 
+export async function getCurrencyCode(tripId: number): Promise<string | null> {
+  const supabase = await createClient();
+  const { data: trip } = await supabase
+    .from('trips')
+    .select('countryCode')
+    .eq('id', tripId)
+    .maybeSingle();
+
+  if (!trip) return null;
+
+  return (countryToCurrency as Record<string, string>)[trip.countryCode] ?? null;
+}
+
 export async function getExchangeRate(tripId: number) {
   const supabase = await createClient();
   const { data: trip } = await supabase

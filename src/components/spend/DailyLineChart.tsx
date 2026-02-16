@@ -13,9 +13,10 @@ import { getDailyStats } from '../../actions/spendStats';
 
 interface DailyLineChartProps {
   tripId: string;
+  currencyCode: string;
 }
 
-export default function DailyLineChart({ tripId }: DailyLineChartProps) {
+export default function DailyLineChart({ tripId, currencyCode }: DailyLineChartProps) {
   const [chartData, setChartData] = useState<{ date: string; amount: number }[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -63,7 +64,7 @@ export default function DailyLineChart({ tripId }: DailyLineChartProps) {
           <YAxis />
           <Tooltip
             formatter={(value: number | undefined) =>
-              value !== undefined ? `${value.toLocaleString()}원` : ''
+              value !== undefined ? `${value.toLocaleString()} ${currencyCode}` : ''
             }
             labelFormatter={(label) => `${label}`}
           />
