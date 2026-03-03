@@ -5,6 +5,20 @@
 웹 사이트 : https://traveloper.vercel.app/
 
 ## 미리보기
+<table>
+  <tr>
+    <td><img width="400" src="https://github.com/user-attachments/assets/6061bdf9-4916-4a43-8bfc-6b50950fc44a" /></td>
+    <td><img width="400" src="https://github.com/user-attachments/assets/3b354830-8010-45ae-9494-bb35908cb2b5" /></td>
+  </tr>
+  <tr>
+    <td><img width="400" src="https://github.com/user-attachments/assets/abe168f9-c940-4ed9-b274-ea0a4673a692" /></td>
+    <td><img width="400" src="https://github.com/user-attachments/assets/7aaa962e-a913-4416-bfc3-f1fb9c2e943d" /></td>
+  </tr>
+  <tr>
+    <td><img width="400" src="https://github.com/user-attachments/assets/8211ef54-508f-44ef-a65f-6329b572c911" /></td>
+    <td><img width="400" src="https://github.com/user-attachments/assets/a8af7ebb-c903-45a2-aead-c5fc13284be0" /></td>
+  </tr>
+</table>
 
 ## ⚡ 주요 기능
 
